@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
-import { AuthResponse, User } from '../interfaces/User';
+import { AuthResponse, FavoriteDTO, User } from '../interfaces/User';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +11,9 @@ export class RequestService {
   createPostUrl: string = 'http://localhost:8080/api/user/register';
   BASE_URL: string = 'http://localhost:8080/api/user/login';
   Buscar: string = 'https://api.spotify.com/v1/search';
+  GET_SONG_URL : string = "https://api.spotify.com/v1/tracks/";
+
+  POST_FAVORITE : string = "http://localhost:8080/api/favorites/guardar";
 
   private headerCustom!: HttpHeaders;
 
@@ -51,6 +54,20 @@ export class RequestService {
       'https://api.spotify.com/v1/search?q=remaster%2520track%3ADoxy%2520artist%3AMiles%2520Davis&type=album',
       { headers }
     );
+  }
+  public getSong(id : string) {
+    let token = localStorage.getItem('spotifyToken');
+    console.log('Soy el log de getSONG \n\n' + token);
+
+    let headers = {
+      
+      Authorization: `${token}`,
+    };
+
+    return this.http.get(
+      `${this.GET_SONG_URL}${id}`,
+      { headers }
+    ).pipe(catchError(this.handleError<any>('aError')));
   }
 
  
@@ -100,6 +117,12 @@ export class RequestService {
       .pipe(catchError(this.handleError<any>('aError')));
   }
 
+  public getUserRequest(username : string): Observable<User> {
+    return this.http
+      .get<User>( `http://localhost:8080/api/user/get/${username}` )
+      .pipe(catchError(this.handleError<any>('aError')));
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
@@ -118,6 +141,13 @@ export class RequestService {
         catchError(this.handleError<any>('Error '))
       );
   }
+
+
+  addFavorite(favoriteDTO: FavoriteDTO): Observable<FavoriteDTO> {
+    return this.http.post<FavoriteDTO>(`${this.POST_FAVORITE}`, favoriteDTO);
+  }
+  
+
 }
 
 export class TrackModel {

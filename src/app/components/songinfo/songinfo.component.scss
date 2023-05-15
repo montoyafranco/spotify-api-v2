@@ -1,0 +1,18 @@
+.card-img-top{
+    width: 30rem;
+}
+
+
+.card{
+    margin-top: 1rem;
+    height: 80vh;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    align-items: stretch;
+    padding: 40px;
+    margin-left: 100px;
+    width: 80vw;
+}

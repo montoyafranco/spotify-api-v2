@@ -37,7 +37,7 @@ export class HomeComponent {
   crearTokenSpotify() {
     if(!localStorage.getItem("spotifyToken")){
       this.request.firstTimeSpotifyToken().subscribe((data) => console.log(data))
-    }   
+    }else{console.log("Usuario con sesion para spotify valida")}   
    
  
    

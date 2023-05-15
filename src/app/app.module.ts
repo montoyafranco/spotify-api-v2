@@ -10,6 +10,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { SonginfoComponent } from './components/songinfo/songinfo.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    SonginfoComponent
+    SonginfoComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,

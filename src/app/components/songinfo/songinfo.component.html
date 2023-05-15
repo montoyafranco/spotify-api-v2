@@ -1,1 +1,22 @@
-<p>songinfo works!</p>
+<!-- <p>songinfo works!</p>
+
+<h2>Song Info</h2>
+<p>ID: {{songId}}</p> -->
+
+
+<div class="card">
+    <img class="card-img-top" src="{{ song.album.images[0].url }}" alt="{{ song.name }}">
+    <div class="card-body">
+      <h5 class="card-title">{{ song.name }}</h5>
+      <p class="card-text">Artista: {{ song.artists[0].name }}</p>
+      <p class="card-text">Duración: {{ song.duration_ms }} ms</p>
+      <p class="card-text">Disco: {{ song.disc_number }}</p>
+      <p class="card-text">Número de pista: {{ song.track_number }}</p>
+      <p class="card-text">Tipo de Album: {{ song.album.album_type }}</p>
+      <p class="card-text">Popularidad: {{ song.popularity }}</p>
+      <a href="{{ song.external_urls.spotify }}" target="_blank" class="btn btn-primary">Escuchar en Spotify</a>
+      <button *ngIf="tokenUser.length > 1" class="btn btn-primary" (click)="onSubmit()">Agregar/quitar de favoritos</button>
+
+    </div>
+  </div>
+  

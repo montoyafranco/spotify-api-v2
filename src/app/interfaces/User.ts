@@ -11,3 +11,14 @@ export interface AuthResponse {
     // Aquí podrías agregar más propiedades si lo necesitas
   }
     
+  export interface FavoriteDTO {
+   
+    user: UserDTOFavorite;
+    songId: string;
+  }
+  
+  export interface UserDTOFavorite {
+    id: number;
+    // otros campos del usuario, si es necesario
+  }
+   
