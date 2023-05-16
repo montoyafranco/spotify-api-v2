@@ -3,34 +3,31 @@ import { ActivatedRoute } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
 import jwt_decode from 'jwt-decode';
 import { FavoriteDTO, User } from 'src/app/interfaces/User';
-
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-songinfo',
   templateUrl: './songinfo.component.html',
-  styleUrls: ['./songinfo.component.scss']
+  styleUrls: ['./songinfo.component.scss'],
 })
 export class SonginfoComponent {
-
-  songId!: string; 
+  songId!: string;
   song: any = {};
   tokenUser!: string;
-  username! : string;
+  username!: string;
   user!: User;
 
-  constructor(private route: ActivatedRoute,private request : RequestService) { }
+  constructor(private route: ActivatedRoute, private request: RequestService) {}
 
   ngOnInit() {
-    this.songId = this.route.snapshot.paramMap.get('id') || "";
+    this.songId = this.route.snapshot.paramMap.get('id') || '';
     console.log('Song ID:', this.songId);
-    this.request.getSong(this.songId).subscribe((data)=> {
+    this.request.getSong(this.songId).subscribe((data) => {
       console.log(data);
       this.song = data;
-      
-    })
-    
-    this.tokenUser = localStorage.getItem('token') ?? "" ;
+    });
+
+    this.tokenUser = localStorage.getItem('token') ?? '';
     if (this.tokenUser) {
       const decodedToken: any = jwt_decode(this.tokenUser.split(' ')[1]);
       this.username = decodedToken.sub;
@@ -42,42 +39,33 @@ export class SonginfoComponent {
       console.log(data);
       this.user = data;
     });
-    
-    
-
-    
-
-
   }
 
-//   agregarFavoritos(this.songId) {
-    
-//       this.request.firstTimeSpotifyToken().subscribe((data: any) => console.log(data))
-      
-   
- 
-   
-//  }
-onSubmit(){
-  const favoriteDTO: FavoriteDTO = {
-    user: { id: this.user.id! },
-    songId: this.songId
-  };
-  
-  this.request.addFavorite(favoriteDTO).subscribe(
-    (favorite) => { console.log(favorite)
-      // hacer algo en caso de éxito
-    },
-    (error) => {
-      console.log(error)
-      // manejar el error
-    }
-  );
-}
+  //  }
+  onSubmit() {
+    const favoriteDTO: FavoriteDTO = {
+      user: { id: this.user.id! },
+      songId: this.songId,
+    };
 
+    this.request.addFavorite(favoriteDTO).subscribe(
+      (favorite) => {
+        console.log(favorite);
 
-
-
-
-
+        Swal.fire({
+          icon: 'success',
+          title: 'Favorito agregado',
+          text: 'El favorito se agregó correctamente.',
+        });
+      },
+      (error) => {
+        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo agregar el favorito.',
+        });
+      }
+    );
+  }
 }

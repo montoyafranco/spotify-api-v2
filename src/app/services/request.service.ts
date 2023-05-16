@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { AuthResponse, FavoriteDTO, User } from '../interfaces/User';
 
@@ -11,9 +15,12 @@ export class RequestService {
   createPostUrl: string = 'http://localhost:8080/api/user/register';
   BASE_URL: string = 'http://localhost:8080/api/user/login';
   Buscar: string = 'https://api.spotify.com/v1/search';
-  GET_SONG_URL : string = "https://api.spotify.com/v1/tracks/";
+  GET_SONG_URL_SPOTIFY: string = 'https://api.spotify.com/v1/tracks/';
+  GET_SONGS: string = 'http://localhost:8080/api/favorites/canciones/';
 
-  POST_FAVORITE : string = "http://localhost:8080/api/favorites/guardar";
+  POST_FAVORITE: string = 'http://localhost:8080/api/favorites/guardar';
+
+  GET_Spotify_All_Songs = 'https://api.spotify.com/v1';
 
   private headerCustom!: HttpHeaders;
 
@@ -23,22 +30,23 @@ export class RequestService {
     this.headerCustom = new HttpHeaders({
       Authorization: `${localStorage.getItem('spotifyToken')}`,
     });
-    return this.http.get(`${this.Buscar}?q=${q}&type=track&limit=10`, {
-      headers: this.headerCustom,
-    }).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          this.handleUnauthorizedError();
-        }
-        return throwError(error);
-      }),
-    );
+    return this.http
+      .get(`${this.Buscar}?q=${q}&type=track&limit=10`, {
+        headers: this.headerCustom,
+      })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 401) {
+            this.handleUnauthorizedError();
+          }
+          return throwError(error);
+        })
+      );
   }
 
-  public handleUnauthorizedError(){
-    localStorage.removeItem('spotifyToken')
+  public handleUnauthorizedError() {
+    localStorage.removeItem('spotifyToken');
     this.firstTimeSpotifyToken();
-
   }
 
   public getArtist() {
@@ -55,32 +63,29 @@ export class RequestService {
       { headers }
     );
   }
-  public getSong(id : string) {
+  public getSong(id: string) {
     let token = localStorage.getItem('spotifyToken');
     console.log('Soy el log de getSONG \n\n' + token);
 
     let headers = {
-      
       Authorization: `${token}`,
     };
 
-    return this.http.get(
-      `${this.GET_SONG_URL}${id}`,
-      { headers }
-    ).pipe(catchError(this.handleError<any>('aError')));
+    return this.http
+      .get(`${this.GET_SONG_URL_SPOTIFY}${id}`, { headers })
+      .pipe(catchError(this.handleError<any>('aError')));
   }
 
- 
-  public firstTimeSpotifyToken() {   
+  public firstTimeSpotifyToken() {
     const body = new URLSearchParams();
     body.set('grant_type', 'client_credentials');
     body.set('client_id', '87d9838110b7473d816cd83e0a842bfd');
     body.set('client_secret', '92a8c0f286bc4db4beceb42c036b132a');
-  
+
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
     };
-  
+
     return this.http
       .post('https://accounts.spotify.com/api/token', body.toString(), {
         headers,
@@ -104,10 +109,6 @@ export class RequestService {
         })
       );
   }
-  
-  
-
-
 
   public createUser(user: User): Observable<User> {
     return this.http
@@ -117,9 +118,9 @@ export class RequestService {
       .pipe(catchError(this.handleError<any>('aError')));
   }
 
-  public getUserRequest(username : string): Observable<User> {
+  public getUserRequest(username: string): Observable<User> {
     return this.http
-      .get<User>( `http://localhost:8080/api/user/get/${username}` )
+      .get<User>(`http://localhost:8080/api/user/get/${username}`)
       .pipe(catchError(this.handleError<any>('aError')));
   }
 
@@ -127,7 +128,7 @@ export class RequestService {
     return (error: any): Observable<T> => {
       console.error(error);
       console.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
+      return throwError(error);
     };
   }
   public login(user: User): Observable<any> {
@@ -142,12 +143,32 @@ export class RequestService {
       );
   }
 
-
   addFavorite(favoriteDTO: FavoriteDTO): Observable<FavoriteDTO> {
-    return this.http.post<FavoriteDTO>(`${this.POST_FAVORITE}`, favoriteDTO);
-  }
-  
 
+    
+    const url = `${this.POST_FAVORITE}`;
+  const token = localStorage.getItem('token') || '';
+  const headers = new HttpHeaders().set('Authorization', token);
+
+  return this.http.post<FavoriteDTO>(url, favoriteDTO, { headers });
+  }
+
+  getCancionesFavoritas(userId: number): Observable<string[]> {
+    const url = `${this.GET_SONGS}${userId}`;
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', token);
+    return this.http.get<string[]>(url, { headers });
+  }
+
+  getTracksByIds(ids: string[]): Observable<any> {
+    const url = `${this.GET_Spotify_All_Songs}/tracks?ids=${ids.join(',')}`;
+    console.log(ids);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      ` ${localStorage.getItem('spotifyToken')}`
+    );
+    return this.http.get<any>(url, { headers });
+  }
 }
 
 export class TrackModel {

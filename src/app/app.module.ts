@@ -11,6 +11,7 @@ import { SonginfoComponent } from './components/songinfo/songinfo.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

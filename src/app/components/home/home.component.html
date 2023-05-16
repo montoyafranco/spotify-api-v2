@@ -1,5 +1,5 @@
 
-<div class="wrapper">
+<!-- <div class="wrapper">
   <div class="limit-width" #asBoxInput>
     <input
       class="input-src"
@@ -13,6 +13,25 @@
 
     
   </div>
+</div> -->
+<div class="Card">
+  <div class="CardInner">
+  <label>Busca cualquier cancion</label>
+  <div class="container">
+    <div class="Icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#657789" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <div class="InputContainer">
+      <input class="input-src"
+      [ngClass]="{ loading: isLoading }"
+      [spellcheck]="false"
+      placeholder="Canciones"
+      type="text"
+      (ngModelChange)="search($event)"
+      [(ngModel)]="src"  placeholder="Tipea y encontraras tu cancion..."/>
+    </div>
+  </div>
+ </div>
 </div>
 
 <!-- <div class="card" style="width: 18rem;">
@@ -30,7 +49,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ item.name }}</h5>
       <p class="card-text">{{ item.artists[0].name }}</p>
-      <a [routerLink]="['/songinfo', item.id]" class="btn btn-primary"
+      <a [routerLink]="['/songinfo', item.id]" class="btn btn-light"
         >Ver detalles</a
       >
     </div>

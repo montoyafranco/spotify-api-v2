@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+.form-group{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+form{
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: flex-end;
+    align-items: stretch;
+
+}
+  
