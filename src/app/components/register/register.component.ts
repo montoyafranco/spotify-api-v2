@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { catchError, throwError } from 'rxjs';
-import { User } from 'src/app/interfaces/User';
+import { User } from 'src/app/interfaces/Models';
 import { RequestService } from 'src/app/services/request.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -39,7 +39,7 @@ export class RegisterComponent {
         .subscribe({
           next: (user) => {
             console.log(user);
-            this.showSuccessAlert('Your work has been saved');
+            this.showSuccessAlert('Seras redirigido a Login ');
             setTimeout(() => {
               this.router.navigateByUrl('/login');
             }, 1500);

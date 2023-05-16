@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { User } from 'src/app/interfaces/User';
+import { User } from 'src/app/interfaces/Models';
 import { RequestService } from 'src/app/services/request.service';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';

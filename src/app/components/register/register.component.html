@@ -1,15 +1,7 @@
-<!-- <p>register works!</p>
-<form (ngSubmit)="onSubmit()">
-    <label>Username:</label>
-    <input type="text" name="username" [(ngModel)]="username" required>
-  
-    <label>Password:</label>
-    <input type="password" name="password" [(ngModel)]="password" required>
-  
-    <button type="submit">Crear usuario</button>
-</form> -->
+
 
 <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
+  <h1>Signup</h1>
   <div class="form-group">
     <label for="exampleInputEmail1">Username</label>
     <input type="email"  [(ngModel)]="username" title="Username must be at least 4 characters long" minlength="4" required name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">

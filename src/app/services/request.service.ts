@@ -6,7 +6,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
-import { AuthResponse, FavoriteDTO, User } from '../interfaces/User';
+import { AuthResponse, FavoriteDTO, User } from '../interfaces/Models';
 
 @Injectable({
   providedIn: 'root',

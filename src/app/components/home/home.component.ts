@@ -26,9 +26,7 @@ export class HomeComponent {
   getTokenSpotifyCacheado() {
     const cachedToken = localStorage.getItem('spotifyToken');
     console.log('Hola, soy el token cacheado de Spotify:', cachedToken);
-    // this.request.getTokenSpotify().subscribe((data) => {
-    //   console.log(data);
-    // });
+  
   }
 
   crearTokenSpotify() {

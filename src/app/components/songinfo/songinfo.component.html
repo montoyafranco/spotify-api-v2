@@ -5,7 +5,7 @@
 
 
 <div class="card">
-    <img class="card-img-top" src="{{ song.album.images[0].url }}" alt="{{ song.name }}">
+    <img class="card-img-top" src="{{ song.album?.images[0]?.url }}" alt="{{ song.name }}">
     <div class="card-body">
       <h5 class="card-title">{{ song.name }}</h5>
       <p class="card-text">Artista: {{ song.artists[0].name }}</p>

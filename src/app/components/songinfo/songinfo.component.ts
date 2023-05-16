@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
 import jwt_decode from 'jwt-decode';
-import { FavoriteDTO, User } from 'src/app/interfaces/User';
+import { FavoriteDTO, User } from 'src/app/interfaces/Models';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -32,7 +32,7 @@ export class SonginfoComponent {
       const decodedToken: any = jwt_decode(this.tokenUser.split(' ')[1]);
       this.username = decodedToken.sub;
       console.log('Username:', this.username);
-      // aquí puedes hacer lo que necesites con el username, como enviarlo al backend para obtener información del usuario o realizar la lógica para habilitar o deshabilitar el botón de favoritos
+      
     }
 
     this.request.getUserRequest(this.username).subscribe((data: User) => {
@@ -68,4 +68,6 @@ export class SonginfoComponent {
       }
     );
   }
+  
+  
 }
