@@ -4,9 +4,11 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+   
   }
   
 .form-group{
+    color: white;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -15,13 +17,21 @@
     align-items: stretch;
 }
 form{
-    height: 50vh;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-content: space-around;
-    justify-content: flex-end;
+    justify-content: space-around;
     align-items: stretch;
+    background-color: rgba(174, 153, 153, 0.04);
+    margin-left: 25vw;
+    margin-top: 20vh;
+    padding: 10px;
 
+
+}
+h1{
+    color: white;
 }
   

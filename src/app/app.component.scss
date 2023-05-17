@@ -11,10 +11,13 @@
   
   
   .custom-sidebar {
-    background-color: red;
+    display: flex;
+    background-color: rgba(11, 7, 7, 0.348);
+    
     width: 20%;
     position: fixed;
     height: 100vh;
+    border-radius: 2rem;
   }
   
   .custom-content {
