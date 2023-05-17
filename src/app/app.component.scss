@@ -1,0 +1,28 @@
+.custom-container {
+    display: flex;
+    height: 100vh;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+  
+  
+  .custom-sidebar {
+    background-color: red;
+    width: 20%;
+    position: fixed;
+    height: 100vh;
+  }
+  
+  .custom-content {
+    
+    margin-left: 20%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+  }

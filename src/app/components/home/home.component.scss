@@ -8,6 +8,7 @@
     
   }
   
+  
   .card {
     
     margin: 10px;
@@ -88,8 +89,9 @@ body, html {
 
 .CardInner {
   padding: 16px 16px;
-  background-color: #ffffff8f;
+  
   border-radius: var(--border-radius);
+  width: 75vw;
 }
 
 .container {
@@ -138,6 +140,7 @@ input {
   -webkit-appearance: none;
   transition: all 240ms ease-out;
   width: 100%;
+  border-radius: 10rem;
   
   &::placeholder {
     color: #6d7f8f;
@@ -151,8 +154,8 @@ input {
 };
   
 .InputContainer {
-  --top-shadow: inset 1px 1px 3px #c5d4e3, inset 2px 2px 6px #c5d4e3;
-  --bottom-shadow: inset -2px -2px 4px rgba(255,255,255, .7);
+  
+ 
   
   position: relative;
   border-radius: var(--border-radius);

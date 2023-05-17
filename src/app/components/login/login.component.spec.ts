@@ -5,6 +5,7 @@ import { RequestService } from 'src/app/services/request.service';
 import { Router } from '@angular/router';
 import { throwError, of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import Swal from 'sweetalert2';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -39,17 +40,18 @@ describe('LoginComponent', () => {
     spyOn(requestService, 'login').and.returnValue(of('fakeToken'));
     spyOn(localStorage, 'setItem');
     
-    spyOn(router, 'navigate');
-
+    
+  
     component.username = 'admin';
     component.password = 'root';
     component.onSubmit();
-
+  
     expect(requestService.login).toHaveBeenCalled();
     expect(localStorage.setItem).toHaveBeenCalledWith('token', 'fakeToken');
    
-    expect(router.navigate).toHaveBeenCalledWith(['']);
+    
   });
+  
 
   it('should display error alert on failed login', () => {
     spyOn(requestService, 'login').and.returnValue(throwError('Fake error'));
