@@ -2,26 +2,50 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# Frontend para Spotify Api 
 
-## Code scaffolding
+Aplicación web que permita a los usuarios buscar canciones
+utilizando la API de Spotify, pero además implementar un sistema de autenticación de
+usuario mediante JWT (JSON Web Token). Los usuarios deben poder registrarse, iniciar
+sesión y guardar canciones en una lista de favoritos. Los usuarios autenticados podrán
+acceder a su lista de favoritos en cualquier momento.Se comunicara directamente con la Api de Spotify para crear un token y eso utilizarlo como autorizacion
+para hacer peticiones a la api como en este caso que serian getAlbums (esto solo es de prueba no se utiliza en ningun momento) ,  Obtener canciones por buscador , Obtener cancion detallada por Id y Obtener muchas canciones 
+con una pequeña muestra de audio dependiendo de la informacion proveida. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Appendix
 
-## Build
+El backend a el cual conecta este front esta en esta direccion : https://github.com/montoyafranco/backend-test
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para correr esta app necesitas agregar las dependencias necesarias 
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+```bash
+  npm install 
+```Luego para correrlo usar
+```bash
+  ng serve -o
+```
+    
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Test
+
+Para correr los test darle:   ng test
+
+
+
+
+## FAQ
+
+#### Se puede hacer mejor el codigo ?
+
+Si , por cuestiones de tiempo se puede testear a mayor profundidad y utilizar mejores arquitecturas. Idealmente pronto sera refactorizado 
+
+
+
